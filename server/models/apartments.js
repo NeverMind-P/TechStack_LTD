@@ -10,19 +10,19 @@ const client = new Client({
 client.connect();
 
 async function getFiltered(room, price){
-    return await client.query(`SELECT * FROM apartments where room = ${room} order by price ${price};`);
+    return client.query(`SELECT * FROM apartments where room = ${room} order by price ${price};`);
 };
 
 async function getAll(){
-    return await client.query("SELECT * FROM apartments;");
+    return client.query("SELECT * FROM apartments;");
 };
 
 async function getById(id){
-    return await client.query(`SELECT * FROM apartments WHERE id = ${id};`)
+    return client.query(`SELECT * FROM apartments WHERE id = ${id};`)
 };
 
 async function setApartment({ room, name, price, description }){
-    await client.query(`INSERT INTO apartments(room, name, price, description) VALUES(\'${room}\',\'${name}\',\'${price}\', \'${description}\');`);
+    client.query(`INSERT INTO apartments(room, name, price, description) VALUES(\'${room}\',\'${name}\',\'${price}\', \'${description}\');`);
 }
 
 async function deleteApartment(id){

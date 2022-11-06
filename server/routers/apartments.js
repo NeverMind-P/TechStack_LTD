@@ -12,7 +12,7 @@ router.get("/", [
     const { room, price } = req.query
     try {
         if(room && price){
-            const response =  await getFiltered(room, price);
+            const response = await getFiltered(room, price);
             return res.json(response.rows).status(200);
         } else {
             const response = await getAll()
