@@ -9,7 +9,7 @@ const clickHandlerDelete = (event, id) => {
     axios.delete(`${API_URL}/${id}`);
 };
 
-export const AvailableApartments = ({ apartments }) => {
+export const AvailableApartments = ({ apartments, updateRented }) => {
     const AvailableApartments = ({ id, name, room, price }) => {
         return (
             <WrapperApartments>
@@ -18,8 +18,7 @@ export const AvailableApartments = ({ apartments }) => {
                 </div>
                 <Buttons>
                     <Button
-                        onClick={(e) => {
-                        }}
+                        onClick={updateRented}
                         style={{ background: "darkblue" }}
                     >
                         Rent

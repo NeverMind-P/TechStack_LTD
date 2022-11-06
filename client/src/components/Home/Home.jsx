@@ -15,11 +15,34 @@ const Home = () => {
         "description": "Great apartments"
     }])
 
-    const cancelRent = (id) => {
+    const cancelRent = (id) => { 
             let newAvailable = data.id.filter(
-                (bike) => bike.id_bike !== id
+                (apartment) => apartment.id !== id
             );
             setRented({ ...data, ...newAvailable });
+    };
+
+    const updateData = (id, rented) => {
+        let updatedApartment;
+        if (rented) {
+            updatedApartment = data.filter((apartment) => apartment.id === id);
+        } else {
+            updatedApartment = data.filter((apartment) => apartment.id === id);
+        }
+        updatedApartment = updatedApartment[0];
+
+        if (updatedApartment.rented) {
+            const newRented = data.filter(
+                (apartment) => apartment !== updatedApartment
+            );
+            updatedApartment = false;
+            const newAvailable = [...data, updatedApartment];
+            setRented({ rented: newRented, available: newAvailable });
+        } else {
+            updatedApartment = true;
+            const newRented = [...data.rented, updatedApartment];
+            setRented(newRented);
+        }
     };
 
     useEffect(() => {
@@ -33,6 +56,7 @@ const Home = () => {
             <CurrentApartments apartments={rented} cancelRent={cancelRent} />
             <AvailableApartments
                 apartments={data}
+                updateRendet={updateData}
             />
         </>
     );
