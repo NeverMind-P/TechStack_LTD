@@ -24,6 +24,6 @@ Body example:
 In case the body is invalid, User will see a response with a "400" status code.
 #
 # "Delete" http://localhost:3000/apartments/id 
-Delete special book by Id
+Delete special apartment by Id
 
 
