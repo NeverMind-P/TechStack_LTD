@@ -1,6 +1,6 @@
 ## Instructions
 
-1. Clone the repo: `git clone git@github.com:manjeshpv/node-express-passport-mysql.git`
+1. Clone the repo: `git clone https://github.com/NeverMind-P/TechStack_LTD.git`
 2. Install packages: `cd client/ && npm install`
 3. Install packages: `cd server/ && npm install`
 4. Change data in .env file.
