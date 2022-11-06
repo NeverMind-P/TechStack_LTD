@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
-const middlewares = require('./models/middlewares');
+const middlewares = require('./middlewares/middlewares');
 const PORT = process.env.PORT || 5000;
 
 const apartments = require('./routers/apartments');

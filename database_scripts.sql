@@ -1,6 +1,6 @@
 CREATE DATABASE apartmentmarketplace;
 
-CREATE TABLE apartments(
+CREATE TABLE IF NOT EXISTS apartments(
     id SERIAL,
     room DECIMAL NOT NULL,
     name VARCHAR(255) NOT NULL,

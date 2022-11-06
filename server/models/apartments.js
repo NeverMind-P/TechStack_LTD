@@ -9,55 +9,24 @@ const client = new Client({
 });
 client.connect();
 
-async function getAll(req, res){
-    const { room, price } = req.query
-    if(room && price){
-        await client.query(`SELECT * FROM apartments where room = ${room} order by price ${price};`, (err, apartments) => {
-            if (err) {
-                console.log(err);
-            } else res.json(apartments.rows).status(200);
-        });
-    } else {
-        await client.query("SELECT * FROM apartments;", (err, apartments) => {
-            if (err) {
-                console.log(err);
-            } else res.json(apartments.rows).status(200);
-        });
-    }
+async function getFiltered(room, price){
+    return await client.query(`SELECT * FROM apartments where room = ${room} order by price ${price};`);
 };
 
-async function getById(req, res){
-    const { id } = req.params;
-    await client.query(`SELECT * FROM apartments WHERE id = ${id};`, (err, apartments) => {
-        if (err) {
-            console.log(err);
-        } else res.json(apartments.rows).status(200);
-    });
+async function getAll(){
+    return await client.query("SELECT * FROM apartments;");
 };
 
-async function setApartment(req, res){
-    const { room, name, price, description } = req.body;
-    const addApartmentQuery = `INSERT INTO apartments(room, name, price, description) VALUES(\'${room}\',\'${name}\',\'${price}\', \'${description}\');`;
+async function getById(id){
+    return await client.query(`SELECT * FROM apartments WHERE id = ${id};`)
+};
 
-    await client.query(addApartmentQuery, (err) => {
-        if (err) {
-            console.log(err);
-            res.status(404);
-        } else {
-            res.status(200).send('Succesfully');
-        }
-    });
+async function setApartment({ room, name, price, description }){
+    await client.query(`INSERT INTO apartments(room, name, price, description) VALUES(\'${room}\',\'${name}\',\'${price}\', \'${description}\');`);
 }
 
-async function deleteApartment(req, res){
-    const { id } = req.params;
-
-    client.query(`DELETE FROM apartments WHERE id = ${id};`, (err) => {
-        if (err) {
-            console.log(err);
-            res.status(404);
-        } else res.status(200).send('Succesfully deleted');
-    });
+async function deleteApartment(id){
+    return client.query(`DELETE FROM apartments WHERE id = ${id};`);
 }
 
 module.exports = {
@@ -65,4 +34,5 @@ module.exports = {
     getById,
     setApartment,
     deleteApartment,
+    getFiltered
 };
