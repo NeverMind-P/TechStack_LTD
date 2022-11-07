@@ -30,19 +30,20 @@ export const Form = () => {
                 </Block>
                 <Block>
                     Rooms
-                    <Input
-                        {...register("room", { min: 1 })} 
+                    <Input {...register("room", { min: 0, valueAsNumber: true, required: true })}
                         onChange={(event) =>
                             setData({ ...data, room: event.target.value })
                         }
                         placeholder="4"
                         style={{ width: "50px" }}
+                        type="number"
+                        min="1"
                     />
                 </Block>
                 <Block>
                     Description
                     <Input
-                        {...register("room", { max: 99 })} 
+                        {...register("description", { max: 99, required: true })} 
                         onChange={(event) =>
                             setData({ ...data, description: event.target.value })
                         }
@@ -54,7 +55,7 @@ export const Form = () => {
                 <Block>
                     Rent Price
                     <Input
-                        {...register("room", { min: 1 })} 
+                        {...register("price", { min: 1, valueAsNumber: true, required: true })} 
                         placeholder="99.00"
                         onChange={(event) =>
                             setData({ ...data, price: +event.target.value })
