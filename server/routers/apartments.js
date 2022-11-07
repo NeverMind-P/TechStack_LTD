@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
 
     try {
         await setApartment({ room, name, price, description })
-        return res.status(200).send('Succesfully');
+        return res.status(201).send('Succesfully');
     } catch (error) {
         console.error(error);
     }
